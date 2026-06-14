@@ -1,0 +1,13 @@
+    //分頁查詢
+    @Override
+    public PageResult pageQuery(EmployeePageQueryDTO e) {
+        //開始分頁查詢 從哪裏開始,要多少
+        PageHelper.startPage(e.getPage(),e.getPageSize());
+        Page<Employee> page=    employeeMapper.pageQuery(e);
+        //總數
+        long total = page.getTotal();
+        //得到的數據
+        List<Employee> list =page.getResult();
+
+        return new PageResult(total,list);
+    }
